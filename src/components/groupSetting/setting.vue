@@ -2,8 +2,6 @@
     <div class="setting">
       <div class="s_header">
         <el-button size="mini"  type="success"  @click="addGroup">新增团队</el-button>
-        <!--<el-button size="mini"  type="success"  @click="publicBtn">发布任务令</el-button>-->
-
       </div>
       <div style="padding:20px">
         <el-table :data="allData" height="400"  v-loading="loading1">
