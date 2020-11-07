@@ -1,6 +1,7 @@
 <template>
     <div class="edit" style="height: 100%;">
      <div style="width: 95%;position: relative;left:2.5%;height:95%;top:2.5%;border: 1px solid #ccc;">
+
       <el-tabs v-model="activeName" type="card" @tab-click="handleClick" >
         <el-tab-pane label="新建周报" name="first" >
 

@@ -257,6 +257,11 @@
                 message: res.data
               })
               this.getGroup();
+            }).catch((res)=>{
+              this.$message({
+                type: "error",
+                message: res.message
+              })
             })
           },
           saveMember(){
@@ -293,6 +298,11 @@
                 message: res.data
               })
                  this.getUser();
+            }).catch(()=> {
+              this.$message({
+                type: "error",
+                message: res.message
+              })
             })
             }
           },
@@ -301,16 +311,32 @@
             this.axios.post('/projectResport/readGroup',JSON.stringify({id:[]})).then((res)=> {
               this.allData=res.data
               this.loading1=false
+            }).catch((res)=> {
+              this.$message({
+                type: "error",
+                message: res.message
+              })
             })
           },
           //获取团队用户数据
           getUser(){
+
             this.loading=true
             this.axios.post('/projectResport/readUser',JSON.stringify({id:[]})).then((res)=> {
              this.AccessUserData=res.data
              // this.userData=res.data
               this.setUserTableData(res.data)
               this.loading=false
+            }).catch((res)=> {
+              this.$message({
+                type: "error",
+                message: res.message
+              })
+            }).catch(()=> {
+              this.$message({
+                type: "error",
+                message: res.message
+              })
             })
           },
           //团队空间已经加入的用户展示
@@ -365,11 +391,12 @@
            cancelButtonText: '取消',
            type: 'warning'
          }).then(() => {
-           result()
+           result("success")
          }).catch(() => {
            reject()
          })
        }).then((res) => {
+         console.log(res)
          const load = this.$loading({
            lock: true,
            text: '正在删除中请耐心等待',
@@ -385,6 +412,11 @@
                message: res.data
              })
              this.getGroup();
+           }).catch((res)=> {
+             this.$message({
+               type: "error",
+               message: res.message
+             })
            })
          }else{
            this.axios.post('/projectResport/deleUser',JSON.stringify({id:e.id})).then((res)=> {
@@ -394,6 +426,11 @@
                message: res.data
              })
              this.getUser();
+           }).catch((res)=> {
+             this.$message({
+               type: "error",
+               message: res.message
+             })
            })
          }
 
@@ -450,6 +487,11 @@
                 message: "发布任务令"+res.data
               })
 
+            }).catch((res)=> {
+              this.$message({
+                type: "error",
+                message: res.message
+              })
             })
 
           },

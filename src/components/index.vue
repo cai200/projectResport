@@ -7,6 +7,7 @@
           <li>项目周报管理平台</li>
         </ul>
           <ul class="right">
+            <li><el-input size="mini"/></li>
             <li><i class="el-icon-user"/>&ensp;{{user}}</li>
           </ul>
         </div>
@@ -16,7 +17,7 @@
         <split-pane v-on:resize="resize" :min-percent='0' :default-percent='11' split="vertical">
           <template slot="paneL">
             <div class="aside">
-              <p @click="goRoute(item.path,i)" v-for="(item,i) in leftTags"
+              <p @click="item.event(item.path)" v-for="(item,i) in leftTags"
                  :key="i"
                  style="text-align: center;padding:0px;cursor:pointer"
                  :class="{dadas:claval==i}"
@@ -49,12 +50,13 @@ export default {
   data () {
     return {
       leftTags:[
-        {type:"团队空间", path:"/index/group"},
-        {type:"团队设置", path:"/index/groupSet"},
-        {type:"吐槽专区", path:"/index/groupSet"},
-        {type:"娱乐专区", path:"/index/groupSet"},
+        {type:"团队空间", path:"/index/group",event:this.goRoute},
+        {type:"团队设置", path:"/index/groupSet",event:this.goRoute},
+        {type:"吐槽专区", path:"/index/groupSet",event:this.goRoute},
+        {type:"娱乐专区", path:"/index/groupSet",event:this.goRoute},
+        {type:"个人简历", path:"/resume",event:this.goSemuse},
         ],
-      claval:0,
+      claval:-1,
       user:this.$store.getters.startlogin.user
     }
   },
@@ -62,15 +64,35 @@ export default {
     resize(){
 
     },
-    goRoute(path,id){
-      this.claval=id
+    goRoute(path){
+
       this.$router.push({
         path:path
       })
+    },
+    goSemuse(path){
+      let location=this.$router.resolve({
+        path:path,
+      });
+      window.open(location.href,'_blank')
     }
+  },
+  //监听路由变化
+  watch:{
+    $route(to,from){
+      this.claval=to.meta.className
+      //console.log(to ,from,this.$route.meta.className)
+    }
+  },
+  //监听当前前往路由
+  beforeRouteEnter(to,from,next){
+    console.log(to.meta.className)
+    next();
+
   },
   mounted() {
     this.common.setXueh();
+    this.claval=this.$route.meta.className
   }
 }
 </script>
@@ -113,6 +135,8 @@ export default {
         display:inline-block ;
         list-style-type: none;
         color: #fff;
+        padding-right:10px
+
       }
     }
   }
@@ -136,6 +160,7 @@ export default {
         display:inline-block ;
         list-style-type: none;
         color: #fff;
+
       }
     }
   }

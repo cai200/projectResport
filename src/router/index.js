@@ -24,19 +24,28 @@ export default new Router({
         {
           path: '/index/group',
           name: 'group',
+          meta:{className:0},
           component: ()=>import('../components/groupSpace/group'),
         },
         {
           path: '/index/groupSet',
           name: 'groupSet',
+          meta:{className:1},
           component: ()=>import('../components/groupSetting/setting'),
-        }
+        },
+
       ]
     },
     {
       path: '/resport',
       name: 'resport',
       component: ()=>import('../components/editResport/index'),
+    },
+    {
+      path: '/resume',
+      name: 'resume',
+      meta:{className:2},
+      component: ()=>import('../components/Resume/resume'),
     }
   ]
 })

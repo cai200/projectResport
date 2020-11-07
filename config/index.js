@@ -11,12 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api':{
+      '/projectResport':{
         target: 'http://127.0.0.1:8083/',//目标接口域名
         changeOrigin: true,//是否跨域
-        pathRewrite: {
-          '^/api': ''//重写接口,后面可以使重写的新路径，一般不做更改
-        }
+        // pathRewrite: {
+        //   '^/api': ''//重写接口,后面可以使重写的新路径，一般不做更改
+        // }
       }
     },
 
